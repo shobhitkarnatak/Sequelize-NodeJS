@@ -1,8 +1,9 @@
 const { Sequelize } = require("sequelize");
-const sequelize = new Sequelize("database", "root", "root", {
-  host: "localhost",
+
+const sequelize = new Sequelize('myapp', 'user', 'admin@123', {
+  host: 'localhost',
   port: 3306,
-  dialect: "mysql",
+  dialect: 'mysql'
   // pool:{
   //   max:5, // upto 5 connection at time
   //   min:2, // keep 2 connection alwasy open
@@ -11,14 +12,14 @@ const sequelize = new Sequelize("database", "root", "root", {
   // }
 });
 
-const dbConnection = async() => {
+const dbConnection = async () => {
   try {
-  await sequelize.authenticate();
-  console.log("db connected");
-  } catch(err) {
+    await sequelize.authenticate();
+    console.log("db connected");
+  } catch (err) {
     console.error('Unable to connect to the database:', err);
   }
 };
 
-module.exports = {dbConnection, sequelize};
+module.exports = { dbConnection, sequelize };
 
