@@ -1,7 +1,10 @@
 services:
   app:
-    build: .
-    container_name: my-node-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    container_name: backend-node
     restart: unless-stopped
 
     ports:
@@ -19,7 +22,7 @@ services:
 
   mysql:
     image: mysql:8.4
-    container_name: my-mysql
+    container_name: mysql
     restart: unless-stopped
 
     environment:
