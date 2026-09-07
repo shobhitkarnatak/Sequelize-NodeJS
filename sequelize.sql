@@ -1,5 +1,7 @@
 -- Define model
-sequelize.define(''{})
+sequelize.define('user',{
+    
+})
 
 -- Insert (Create a user)
 const jane = await User.create({ firstName: 'Jane', lastName: 'Doe' });
@@ -97,5 +99,88 @@ const [user, created] = await User.findOrCreate({
         lastName:"Ratra"
     }
 })
+
+-- Create
+User.create(req.body)
+
+-- Find & Update
+User.findByPk(req.params.id)
+User.update(req.body)
+
+-- Delete
+User.destroy()
+
+-- Getter, Setter, Virtuals
+firstName:{
+    type:DataTypes.STRING,
+    get(){
+        const rowValue = this.getDataValue('firstName')
+        return rowValue ? "Mr." + rowValue.toUpperCase():null
+    }
+}
+
+lastName:{
+    type:DataTypes.STRING,
+    set(value){
+       this.setDataValue('lastName', value+ "From India")
+    }
+}
+
+fullName:{
+    type:DataTypes.VIRTUAL,
+    get(){
+        return `${this.firstName} ${this.lastName}`
+    }
+    set(value){
+        throw new Error("Don't set the full name")
+    }
+}
+
+-- Validation & Constraints
+Validations are checks performed in the Sequelize level & Constraints are rules defined at SQL level
+sequelize.define('user',{
+    password:{
+        type:DataTypes.STRING(64),
+        validate: {
+            is: /^[0-9a-f]{64}$/i,
+        }
+    },
+    age:{
+        type:DataTypes.INTEGER,
+        validate:{
+            customValidator(value){
+                if(value==null || this.age<=0){
+                    throw new Error('Age can not be less than 0')
+                }
+            }
+        }
+
+    }
+})
+
+-- Raw queries
+Using this for the complex query
+const user = sequelize.query(`SELECT * FROM 'users'`,{
+    type: QuertType.SELECT,
+    plain: true  // Return first data
+    model: UserModel,
+    mapToModel: true
+})
+
+return res.status(200).json({user})
+
+-- Associations
+-- One To One : Person - Aadhar Card
+
+
+-- One To Many : Customer - Account 
+
+
+-- Many To One : Order - Products
+
+
+-- Many To Many : Customer - Products
+
+
 
 

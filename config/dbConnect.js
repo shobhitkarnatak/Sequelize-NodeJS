@@ -1,9 +1,13 @@
 const { Sequelize } = require("sequelize");
 
-const sequelize = new Sequelize('myapp', 'user', 'admin@123', {
-  host: 'localhost',
-  port: 3306,
-  dialect: 'mysql'
+const sequelize = new Sequelize(
+  process.env.DB_NAME || "myapp",
+  process.env.DB_USER || "user",
+  process.env.DB_PASSWORD || "admin@123",
+  {
+    host: process.env.DB_HOST || "localhost",
+    port: Number(process.env.DB_PORT) || 3306,
+    dialect: "mysql",
   // pool:{
   //   max:5, // upto 5 connection at time
   //   min:2, // keep 2 connection alwasy open

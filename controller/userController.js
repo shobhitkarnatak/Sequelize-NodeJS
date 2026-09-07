@@ -49,7 +49,7 @@ const createUsers = async (req, res) => {
     // const { error } = userSchema.validate(req.body);
     // if (error) return res.status(400).json({ error: error.details[0].message });
     // const user = await UserModel.create(req.body);
-    return res.status(200).json({ maths});
+    return res.status(200).json({ maths });
   } catch (error) {
     console.log(error);
     return res.status(400).json({ error });
@@ -73,12 +73,12 @@ const getUsers = async (req, res) => {
 
     // Many to many relation
     const userWithPost = await StudentModel.findAll({
-        include: [
-          {
-            model: CourseModel,
-          },
-        ],
-      });
+      include: [
+        {
+          model: CourseModel,
+        },
+      ],
+    });
 
 
     // one to many relation

@@ -1,6 +1,7 @@
 const express = require("express");
 const { router } = require("./routes/router");
 const { dbConnection, sequelize } = require("./config/dbConnect");
+const setupSwagger = require("./swagger");
 require("./association");
 
 const { StudentModel } = require("./model/studentModel");
@@ -12,6 +13,7 @@ const { UserModel } = require("./model/userModel");
 const app = express();
 app.use(express.json());
 
+setupSwagger(app);
 app.use("/", router);
 
 const startServer = async () => {
@@ -25,6 +27,7 @@ const startServer = async () => {
     // Start Express server
     app.listen(3000, () => {
       console.log("🚀 Server running at http://localhost:3000");
+      console.log("📄 Swagger docs at http://localhost:3000/api-docs");
     });
   } catch (error) {
     console.error("❌ Error starting server:", error);
