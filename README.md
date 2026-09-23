@@ -28,7 +28,13 @@ docker compose up --build
 
 # Rate limiting
 
+# Load balancer
+
+# forward proxy & reverse proxy
+
 # WebSockets
+
+# pub sub
 
 # Docker + CI/CD
 
@@ -37,3 +43,5 @@ docker compose up --build
 # System design + scaling
 
 # Kafka/RabbitMQ/event-driven architecture
+
+# Indexing

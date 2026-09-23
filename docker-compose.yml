@@ -39,7 +39,16 @@ services:
       - mysql_data:/var/lib/mysql
 
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-padmin@123"]
+      test:
+        [
+          "CMD",
+          "mysqladmin",
+          "ping",
+          "-h",
+          "127.0.0.1",
+          "-uroot",
+          "-padmin@123",
+        ]
       interval: 5s
       timeout: 5s
       retries: 10
